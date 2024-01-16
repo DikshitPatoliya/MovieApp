@@ -34,7 +34,9 @@ export function isIphoneXorAbove() {
 			dimen.height === 852 ||
 			dimen.width === 393 ||
 			dimen.height === 932 ||
-			dimen.width === 932)
+			dimen.width === 932 ||
+			dimen.height === 783 ||
+			dimen.width === 392)
 	);
 }
 

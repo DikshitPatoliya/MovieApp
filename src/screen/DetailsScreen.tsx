@@ -5,7 +5,7 @@ import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
 import { IMAGE_URL } from '../helper/AxoisService';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestGetMovieDetails } from '../redux/slice/movieListSlice';
-import { hp, wp } from '../helper/Responsive';
+import { hp, isAndroid, wp } from '../helper/Responsive';
 import StarIcons from '../assets/svg/StarIcons';
 import { colors } from '../utils/Colors';
 import BackIcons from '../assets/svg/BackIcons';
@@ -25,7 +25,7 @@ interface genres {
 
 
 const DetailsScreen = () => {
-  const { movieDetails } = useSelector((state: RootState ) => state.movieReducers)
+  const { movieDetails } = useSelector((state: RootState) => state.movieReducers)
   const { top } = useSafeAreaInsets();
   const dispatch = useDispatch<any>();
   const routes = useRoute<any>();
@@ -48,8 +48,8 @@ const DetailsScreen = () => {
         <BackIcons />
       </TouchableOpacity>
       <Image source={{ uri: IMAGE_URL + movieDetails?.backdrop_path }} style={styles.backImage} />
-      <Image source={{ uri: IMAGE_URL + movieDetails?.poster_path }} style={[styles.movieImage, { top: top + hp(8) }]} />
-      <View style={[styles.rateView, { top: top + hp(18) }]}>
+      <Image source={{ uri: IMAGE_URL + movieDetails?.poster_path }} style={[styles.movieImage, { top: isAndroid ? top + hp(15) : top + hp(8) }]} />
+      <View style={[styles.rateView, { top: isAndroid ? top + hp(24) : top + hp(18) }]}>
         <StarIcons />
         <Text style={styles.rateText}>{`${Math.round(movieDetails?.vote_average)} / 10`}</Text>
       </View>
@@ -166,9 +166,9 @@ const styles = StyleSheet.create({
   },
   backIcons: {
     position: 'absolute',
-    backgroundColor:colors.black_50,
-    padding:wp(1),
-    borderRadius:20,
+    backgroundColor: colors.black_50,
+    padding: wp(1),
+    borderRadius: 20,
     zIndex: 1,
     marginLeft: wp(3)
   }

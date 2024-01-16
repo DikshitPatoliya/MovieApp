@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, ImageBackground, Pressable, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { requestGetMovieList } from '../redux/slice/movieListSlice';
@@ -37,6 +37,7 @@ const HomeScreen = () => {
 
   return (
     <View style={[styles.mainContainer, { paddingTop: top }]}>
+      <StatusBar translucent backgroundColor={'transparent'} barStyle={'dark-content'}/>
       <Text style={styles.popularText}>POPULAR</Text>
      {movieList?.results.length > 0 ? 
      <FlatList
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
   popularText: {
     fontSize: 20,
     fontWeight: '900',
+    color:colors.black,
     textAlign: 'center',
     marginBottom: hp(2)
   },
